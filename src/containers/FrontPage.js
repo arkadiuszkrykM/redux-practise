@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchMostPopular } from '../store/actions/Fetch_MostPopular';
 import { fetchUpcoming } from '../store/actions/Fetch_Upcoming';
 import Movie from '../components/Movies';
-import './FrontPage.css';
 import DataBox from '../components/DataBox';
 
 class FrontPage extends Component {
@@ -35,11 +34,6 @@ class FrontPage extends Component {
 
         return (
             <React.Fragment>
-                <div className="navbar">
-                    <span>Movies Database</span>
-                    <img src="http://jiayuhk.com/sc/assets/img/sample/shortcode/logo/1.png" width="200" height="100" />
-
-                </div>
                 <div className="movies">
                     <div className="data-box">
                         The list of most popular movies:<br />
@@ -48,6 +42,9 @@ class FrontPage extends Component {
                     <div className="data-box">
                         The list of upcoming movies:<br />
                         <DataBox data={upcomingList} />
+                    </div>
+                    <div className="featured-actors">
+                        Featured actors data here
                     </div>
                 </div>
             </React.Fragment>
