@@ -1,0 +1,29 @@
+
+
+
+li {
+  display: inline;
+  padding: 10px;
+}
+
+ul {
+  width: 380px;
+  height: 240px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.box {
+  border: 1px solid black;
+}
+
+.movies {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+.data-box{
+  // margin: 30px;
+}
