@@ -6,7 +6,7 @@ const DataBox = props => {
     return (
         <div className="box">
         tutaj bedzie widget
-            <ul>
+            <ul className="movie">
                 {props.data}
             </ul>
         </div>

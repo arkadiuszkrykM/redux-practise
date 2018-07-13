@@ -3,7 +3,7 @@ import React from 'react';
 const Upcoming = props => {
     return (
         <div className="box">
-            <ul>
+            <ul className="movies">
             {props.data}
             </ul>
         </div>
