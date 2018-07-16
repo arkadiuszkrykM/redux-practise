@@ -12,7 +12,7 @@ li {
 .box {
   border: 1px solid black; }
 
-.movies {
+.movies, .tv-shows {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;

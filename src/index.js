@@ -8,7 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import RootReducer from './store/reducers/Root_Reducer';
 import thunk from 'redux-thunk';
 import App from './containers/App';
-import AxiosClient from './utils/axiosClient';
+
 
 const axClient = axios.create({
     baseURL: 'https://api.themoviedb.org/3/'

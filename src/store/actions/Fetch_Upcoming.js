@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { API_KEY } from '../../constants/APIKEY';
 import { FETCH_UPCOMING_FULFILLED } from '../consts/Constants'
 

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { API_KEY } from '../../constants/APIKEY';
 import { FETCH_MOSTPOPULAR_FULFILLED } from '../consts/Constants'
 

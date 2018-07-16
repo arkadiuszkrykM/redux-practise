@@ -5,3 +5,14 @@
   align-items: center;
   height: 120px;
   background-color: #b3cde0; }
+
+section {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around; }
+
+.featured-actors {
+  min-height: 100%; }
+
+.data-boxes {
+  width: 70%; }
