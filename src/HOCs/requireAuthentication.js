@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import React, { Component } from '../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
+import { connect } from '../../../../Library/Caches/typescript/2.9/node_modules/@types/react-redux';
+import { Redirect, withRouter } from '../../../../Library/Caches/typescript/2.9/node_modules/@types/react-router-dom';
 // import PropTypes from 'prop-types';
 
 

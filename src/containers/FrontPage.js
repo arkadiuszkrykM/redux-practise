@@ -19,6 +19,11 @@ class FrontPage extends Component {
         this.props.fetchCurrentTvShows();
     }
 
+    checkScroll() {
+        const el = document.querySelector('.data-box');
+        console.log(el);
+    }
+
     render() {
         const { mostPopular, upcoming, popularPeople, popularTvShows, currentTvShows } = this.props;
 
@@ -39,11 +44,11 @@ class FrontPage extends Component {
                         <div className="tv-shows">
                             <div className="data-box">
                                 The list of most popular tv shows:<br />
-                                <DataBox data={popularTvShows} />
+                                <DataBox data={popularTvShows} type="tv" />
                             </div>
                             <div className="data-box">
                                 The list of tv shows on air:<br />
-                                <DataBox data={currentTvShows} />
+                                <DataBox data={currentTvShows} type="tv" />
                             </div>
                         </div>
                     </div>

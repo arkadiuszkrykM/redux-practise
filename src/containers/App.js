@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import FrontPage from './FrontPage';
 import LoginPage from './LoginPage';
 import DatabaseSearch from './DatabasePage';
+import MoviePage from './MoviePage';
 import { userAuth } from '../store/actions/Login_Auth';
 import './FrontPage.css';
 
@@ -26,8 +27,9 @@ class App extends Component {
         <div className="App">
             <div className="navbar">
                 <input type="text" placeholder="Search for movies/TV shows" onChange={this.handleSearch} />
-                <Link to="/database">SEARCH DATABASE</Link>
-                <img className="logo" src="http://jiayuhk.com/sc/assets/img/sample/shortcode/logo/1.png" width="200" height="100" alt="logo" />
+                <Link to="/">
+                    <img className="logo" src="http://jiayuhk.com/sc/assets/img/sample/shortcode/logo/1.png" width="200" height="100" alt="logo" />
+                </Link>
                 <span><Link to="/login">Login/Register</Link></span>
             </div>
             {/* <Switch> */}
@@ -42,6 +44,7 @@ class App extends Component {
                 <Route path="/" exact render={() => ( !this.state.search ? <FrontPage /> : <DatabaseSearch data={this.state.search} /> )} />
                 {/* <Route path="/database" component={DatabaseSearch} /> */}
                 <Route path="/login" render={() => <LoginPage onSubmit={this.submit} /> } />
+                <Route path="/:movieId" component={MoviePage} />
                 {/* <Route path="/yo" render={()=><div>Yolo</div>} /> */}
             {/* </Switch> */}
         </div>
@@ -57,4 +60,4 @@ const mapDispatchToProps = {
     userAuth
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
