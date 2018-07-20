@@ -7,6 +7,7 @@ import { fetchMostPopularTvShows } from '../store/actions/Fetch_MostPopularTvSho
 import { fetchCurrentTvShows } from '../store/actions/Fetch_CurrentTvShows';
 import DataBox from '../components/DataBox';
 import FeaturedActors from '../components/FeaturedActors';
+import Widget from '../components/Widget';
 // import requireAuthentication from '../HOCs/requireAuthentication';
 
 class FrontPage extends Component {
@@ -26,18 +27,19 @@ class FrontPage extends Component {
 
     render() {
         const { mostPopular, upcoming, popularPeople, popularTvShows, currentTvShows } = this.props;
-
         return (
             <React.Fragment>
                 <section>
                     <div className="data-boxes">
                         <div className="movies">
                             <div className="data-box">
-                                The list of most popular movies:<br />
-                                <DataBox data={mostPopular} />
+                                POPULAR:<br />
+                                <DataBox data={mostPopular} votes={mostPopular.sort((a,b) => b.vote_average - a.vote_average)} >
+                                    <Widget />
+                                </DataBox>
                             </div>
                             <div className="data-box">
-                                The list of upcoming movies:<br />
+                                NOW PLAYING:<br />
                                 <DataBox data={upcoming} />
                             </div>
                         </div>
