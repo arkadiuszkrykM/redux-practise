@@ -7,6 +7,7 @@ import { popularPeopleReducer } from './PopularPeople_Reducer';
 import { authReducer } from './Auth_Reducer';
 import { reducer as formReducer } from 'redux-form';
 import { searchReducer } from './Search_Reducer';
+import { WidgetsReducer } from './Widgets_Reducer';
 
 const RootReducer = combineReducers({
     mostPopular: mostPopularReducer,
@@ -16,7 +17,8 @@ const RootReducer = combineReducers({
     currentTvShows: currentShowsReducer,
     searchData: searchReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    widgetsSelection: WidgetsReducer
 
 });
 

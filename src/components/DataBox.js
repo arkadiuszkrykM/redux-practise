@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './MostPopular.css';
 import Movie from './Movies';
-import Widget from './Widget';
+import { widgetUserSelection } from '../store/actions/Widget_UserSelection';
+
 
 import { renderField } from '../utils/validators';
 
@@ -12,44 +14,57 @@ class DataBox extends Component {
         super(props);
         this.state = {
             data: [],
-            votes: []
+            votes: [],
+            dates: [],
+            selectedDate: '',
+            selectedVote: ''
         }
     }
 
 
-    handleClickTwo = (e) => {
-        const mappedProperties = { '1': 30, '2': 0, '3': 5, '4': 14 }
-        let addDaysValue = 0;
-        const addDays = (date, days) => new Date(date.getTime() + days*24*60*50*1000);
-        for(let prop in mappedProperties) {
-            e.target.dataset.id === prop ? addDaysValue = mappedProperties[prop] : null
-        }
+    // handleClickTwo = (e) => {
+    //     const mappedProperties = { '1': 30, '2': 0, '3': 5, '4': 14 }
+    //     let addDaysValue = 0;
+    //     const addDays = (date, days) => new Date(date.getTime() + days*24*60*50*1000);
+    //     for(let prop in mappedProperties) {
+    //         e.target.dataset.id === prop ? addDaysValue = mappedProperties[prop] : null
+    //     }
 
-        const filteredData = this.props.data.filter(movie => {
-            const date = new Date(movie.release_date.replace(/-/g, ' '));
-            return date >= addDays(new Date(), addDaysValue);
+    //     const filteredData = this.props.data.filter(movie => {
+    //         const date = new Date(movie.release_date.replace(/-/g, ' '));
+    //         return date >= addDays(new Date(), addDaysValue);
+    //     });
+    //     this.setState({ data: [...filteredData] })
+
+    //     // debugger;
+    // }
+
+    handleSelectVote = vote => this.setState({ selectedVote: vote });
+
+    handleSelectDate = date => this.setState({ selectedDate: date });
+
+    sortAverageVotes(arr, data) {
+        const sortedData = data.sort((a,b) => b.vote_average - a.vote_average);
+        arr.push(sortedData[0].vote_average, sortedData[5].vote_average, sortedData[10].vote_average,
+            sortedData[15].vote_average, sortedData[19].vote_average)
+    }
+    sortReleaseDates(arr, data) {
+        const sortedDates = data.sort((a,b) => {
+            const firstDate = new Date(a.release_date.replace(/-/g, ' '));
+            const secondDate = new Date(b.release_date.replace(/-/g, ' '));
+            return firstDate > secondDate ? -1 : firstDate < secondDate ? 1 : 0;
         });
-        this.setState({ data: [...filteredData] })
-
-        // debugger;
-    }
-
-    handleClick = (e) => {
-        // const arr = this.props.data.sort((a, b) => b.vote_average - a.vote_average && b.vote_count - a.vote_count);
-
-        // console.log(arr[0].vote_average, arr)
-    }
-
-    sortAverageVotes(arr) {
-        const sortedData = this.props.data.sort((a,b) => b.vote_average - a.vote_average);
-        arr.push(sortedData[0].vote_average, sortedData[5].vote_average, sortedData[10].vote_average, sortedData[15].vote_average, sortedData[19].vote_average)
+        arr.push(sortedDates[0].release_date, sortedDates[5].release_date, sortedDates[10].release_date,
+            sortedDates[15].release_date, sortedDates[19].release_date);
     }
 
     render(){
         const { data } = this.props;
-        const arr = [];
+        const votesArr = [], datesArr = [];
+        console.log(this.state);
         if(data.length && this.props.children) {
-            this.sortAverageVotes(arr);
+            this.sortAverageVotes(votesArr, data);
+            this.sortReleaseDates(datesArr, data);
         }
         const source = this.state.data.length ? this.state.data : data;
         const list = source.map((movie) => (
@@ -57,10 +72,16 @@ class DataBox extends Component {
                 <Movie movie={movie} />
             </Link>
         ));
+        if (!data.length) return (<div>Loading...</div>)
         return (
             <div className="box">
-            {/* <Widget handleClick={this.handleClick.bind(this)} list={list} /> */}
-            {this.props.children && React.cloneElement(this.props.children, { handleClick: this.handleClick.bind(this), votes: arr }) }
+            {this.props.children && React.cloneElement(this.props.children,
+                {
+                    handleSelectDate: this.props.widgetUserSelection.bind(this),
+                    handleSelectVote: this.props.widgetUserSelection.bind(this),
+                    votes: votesArr,
+                    dates: datesArr
+                })}
             <ul className="movie">
                 {list}
             </ul>
@@ -70,4 +91,12 @@ class DataBox extends Component {
     }
 }
 
-export default DataBox;
+const mapStateToProps = state => ({
+    userSelection: state.widgetsSelection
+});
+
+const mapDispatchToProps = {
+    widgetUserSelection
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DataBox);
